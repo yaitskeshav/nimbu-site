@@ -1,0 +1,559 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Nimbu — Expenses that track themselves</title>
+  <meta name="description" content="Nimbu turns the transaction SMS your bank already sends into a tidy, categorised expense tracker — on your phone, with no account and no servers. Budgets, insights, investments, lending and more.">
+  <meta name="theme-color" content="#070708" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#f6f7f1" media="(prefers-color-scheme: light)">
+  <link rel="canonical" href="https://nimbu.keshavbits.tech/">
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/img/icon-180.png">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Nimbu">
+  <meta property="og:title" content="Nimbu — Expenses that track themselves">
+  <meta property="og:description" content="Your bank SMS, turned into a tidy expense tracker. On your phone. No account, no servers.">
+  <meta property="og:url" content="https://nimbu.keshavbits.tech/">
+  <meta property="og:image" content="https://nimbu.keshavbits.tech/assets/img/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preload" href="assets/fonts/unbounded.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/manrope.woff2" as="font" type="font/woff2" crossorigin>
+  <script>try{var t=localStorage.getItem("nimbu-theme");if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+  <link rel="stylesheet" href="assets/css/site.css">
+</head>
+<body>
+
+<!-- Icon sprite: the app's stroke icon set (24×24, 1.7 stroke, round caps) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-sms" viewBox="0 0 24 24"><path d="M4 5h16a1.5 1.5 0 0 1 1.5 1.5v8A1.5 1.5 0 0 1 20 16H10l-4.5 3.2V16H4a1.5 1.5 0 0 1-1.5-1.5v-8A1.5 1.5 0 0 1 4 5z"/><path d="M8 10h8M8 12.5h5"/></symbol>
+    <symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 3 5.5 13.2a.6.6 0 0 0 .5.95H11l-1 6.8 7.5-10.9a.6.6 0 0 0-.5-.95H12l1-6.1z"/></symbol>
+    <symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></symbol>
+    <symbol id="i-cloud" viewBox="0 0 24 24"><path d="M7 18a4 4 0 0 1 0-8 5 5 0 0 1 9.6-1.3A3.5 3.5 0 0 1 17 18z"/></symbol>
+    <symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 20V4M4 20h16"/><rect x="7" y="12" width="2.6" height="5" rx=".8" fill="currentColor"/><rect x="11.7" y="8" width="2.6" height="9" rx=".8" fill="currentColor"/><rect x="16.4" y="14" width="2.6" height="3" rx=".8" fill="currentColor"/></symbol>
+    <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r=".6" fill="currentColor"/></symbol>
+    <symbol id="i-repeat" viewBox="0 0 24 24"><path d="M4 9a5 5 0 0 1 5-5h8l-2.5-2.5M20 15a5 5 0 0 1-5 5H7l2.5 2.5"/></symbol>
+    <symbol id="i-invest" viewBox="0 0 24 24"><path d="M4 19V5M4 19h16"/><path d="M7 15l3.5-3.5 3 3L20 8"/><path d="M16 8h4v4"/></symbol>
+    <symbol id="i-coins" viewBox="0 0 24 24"><circle cx="8.5" cy="8.5" r="5.5"/><path d="M13.2 4.6A5.5 5.5 0 1 1 15.4 15.3"/><path d="M7 8.5h3M8.5 7v3"/></symbol>
+    <symbol id="i-tag" viewBox="0 0 24 24"><path d="M4 4h7l9 9-7 7-9-9z"/><circle cx="8.5" cy="8.5" r="1.3"/></symbol>
+    <symbol id="i-mic" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M6 11a6 6 0 0 0 12 0M12 17v4"/></symbol>
+    <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 4v11M8 11l4 4 4-4M5 20h14"/></symbol>
+    <symbol id="i-upload" viewBox="0 0 24 24"><path d="M12 20V9M8 13l4-4 4 4M5 4h14"/></symbol>
+    <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></symbol>
+    <symbol id="i-food" viewBox="0 0 24 24"><path d="M5 3v6a2.5 2.5 0 0 0 5 0V3M7.5 11.5V21M18 3c-1.6 0-2.6 2-2.6 5s1 4 2.6 4.2V21"/></symbol>
+    <symbol id="i-cart" viewBox="0 0 24 24"><path d="M2.5 3.5h2l2.6 12.2a1.6 1.6 0 0 0 1.57 1.3h8.1a1.6 1.6 0 0 0 1.55-1.24L19.9 8H5.4"/><circle cx="8.5" cy="20" r="1.1" fill="currentColor"/><circle cx="17" cy="20" r="1.1" fill="currentColor"/></symbol>
+    <symbol id="i-car" viewBox="0 0 24 24"><path d="M4 13.5 5.7 8.6A2 2 0 0 1 7.6 7.2h8.8a2 2 0 0 1 1.9 1.4L20 13.5M4 13.5h16v3.2a1 1 0 0 1-1 1h-1.6a1 1 0 0 1-1-1v-.5H7.6v.5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1z"/><circle cx="7.5" cy="15" r=".9"/><circle cx="16.5" cy="15" r=".9"/></symbol>
+    <symbol id="i-bag" viewBox="0 0 24 24"><path d="M6.5 8h11l-.9 11.2a1 1 0 0 1-1 .8H8.4a1 1 0 0 1-1-.8L6.5 8z"/><path d="M9.2 8V6.4a2.8 2.8 0 0 1 5.6 0V8"/></symbol>
+    <symbol id="i-film" viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="14" rx="2"/><path d="M4 9h16M9 5v14M15 5v14"/></symbol>
+    <symbol id="i-salary" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="2"/><circle cx="12" cy="12" r="2.5"/></symbol>
+    <symbol id="i-health" viewBox="0 0 24 24"><path d="M12 21s-7-4.3-7-9.3A3.7 3.7 0 0 1 12 8a3.7 3.7 0 0 1 7 3.7C19 16.7 12 21 12 21z"/></symbol>
+    <symbol id="i-home" viewBox="0 0 24 24"><path d="M3.5 10.5 12 3.5l8.5 7M5.5 9.3V19a1.3 1.3 0 0 0 1.3 1.3h3.4v-4.6a1.8 1.8 0 0 1 3.6 0v4.6h3.4A1.3 1.3 0 0 0 18.5 19V9.3"/></symbol>
+    <symbol id="i-fuel" viewBox="0 0 24 24"><path d="M5 20.5V6a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v14.5"/><path d="M3.5 20.5h11"/><rect x="6.5" y="6.5" width="4" height="3" rx=".6"/><path d="M14 8l2.6 2.6V16a1.4 1.4 0 0 0 2.8 0V9.5L16.6 7"/></symbol>
+    <symbol id="i-transfer" viewBox="0 0 24 24"><path d="M3 9h14M14 6l3 3-3 3"/><path d="M21 15H7M10 12l-3 3 3 3"/></symbol>
+    <symbol id="i-wallet" viewBox="0 0 24 24"><path d="M3.5 7.5A2 2 0 0 1 5.5 5.5h11a1.5 1.5 0 0 1 1.5 1.5H5.5a1 1 0 0 0 0 2H19a1.5 1.5 0 0 1 1.5 1.5v6A2 2 0 0 1 18.5 19.5h-13A2 2 0 0 1 3.5 17.5z"/><circle cx="16.5" cy="13.5" r="1.1" fill="currentColor"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7v5l3.5 2"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="i-chev" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14A8 8 0 1 1 10 4a6 6 0 0 0 10 10z"/></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2.5 12h2M19.5 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h10"/></symbol>
+    <symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 16v-5a6 6 0 0 1 12 0v5l1.5 2h-15z"/><path d="M10 20.5a2 2 0 0 0 4 0"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l7.5 3v5.5c0 4.6-3.2 8.4-7.5 9.5-4.3-1.1-7.5-4.9-7.5-9.5V6z"/><path d="M8.8 12.2l2.2 2.2 4.4-4.6"/></symbol>
+    <symbol id="i-hand" viewBox="0 0 24 24"><path d="M2.5 11.5 6.5 7.5l3.5 1.2L12.5 7h3l6 5"/><path d="M2.5 11.5 8 17a1.6 1.6 0 0 0 2.3 0"/><path d="M8.2 14.2l2.6 2.6a1.6 1.6 0 0 0 2.3 0"/><path d="M10.6 11.8l3.4 3.4a1.6 1.6 0 0 0 2.3 0l.2-.2"/><path d="M12.5 7 9.8 9.8a1.5 1.5 0 0 0 2.1 2.1L14 10l4.8 4.3 2.7-2.3"/></symbol>
+    <symbol id="i-grid" viewBox="0 0 24 24"><rect x="4" y="4" width="7" height="7" rx="2"/><rect x="13" y="4" width="7" height="7" rx="2"/><rect x="4" y="13" width="7" height="7" rx="2"/><rect x="13" y="13" width="7" height="7" rx="2"/></symbol>
+    <symbol id="i-sparkle" viewBox="0 0 24 24"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/><path d="M18.5 15.5l.7 1.8 1.8.7-1.8.7-.7 1.8-.7-1.8-1.8-.7 1.8-.7z"/></symbol>
+    <symbol id="i-trendup" viewBox="0 0 24 24"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></symbol>
+    <symbol id="i-gear" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.2"/><path d="M19.4 13.5a1.7 1.7 0 0 0 .34 1.87l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.7 1.7 0 0 0-1.87-.34 1.7 1.7 0 0 0-1.03 1.56V21a2 2 0 0 1-4 0v-.1A1.7 1.7 0 0 0 8.9 19.3a1.7 1.7 0 0 0-1.87.34l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.7 1.7 0 0 0 .34-1.87 1.7 1.7 0 0 0-1.56-1.03H3a2 2 0 0 1 0-4h.1A1.7 1.7 0 0 0 4.7 8.9a1.7 1.7 0 0 0-.34-1.87l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.7 1.7 0 0 0 1.87.34H9a1.7 1.7 0 0 0 1-1.56V3a2 2 0 0 1 4 0v.1a1.7 1.7 0 0 0 1 1.56 1.7 1.7 0 0 0 1.87-.34l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.7 1.7 0 0 0-.34 1.87V9a1.7 1.7 0 0 0 1.56 1H21a2 2 0 0 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></symbol>
+    <symbol id="i-wifi" viewBox="0 0 24 24"><path d="M2 8.5a15 15 0 0 1 20 0M5 12a10 10 0 0 1 14 0M8.5 15.5a5 5 0 0 1 7 0M12 19h.01"/></symbol>
+    <symbol id="i-battery" viewBox="0 0 24 24"><rect x="2" y="7" width="18" height="10" rx="2"/><path d="M22 10v4"/><rect x="4" y="9" width="13" height="6" rx="1" fill="currentColor"/></symbol>
+    <symbol id="i-receipt" viewBox="0 0 24 24"><path d="M6 3h12v18l-3-1.6L12 21l-3-1.6L6 21z"/><path d="M9 8h6M9 12h6"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M4 7l8 6 8-6"/></symbol>
+    <symbol id="i-android" viewBox="0 0 24 24"><path d="M5 10.5a7 7 0 0 1 14 0V17H5z"/><path d="M7 5.5 5.5 3.5M17 5.5l1.5-2"/><circle cx="9.3" cy="8.5" r=".7" fill="currentColor"/><circle cx="14.7" cy="8.5" r=".7" fill="currentColor"/><path d="M8 17v3M16 17v3"/></symbol>
+    <symbol id="i-rupee" viewBox="31 25 46 62"><g stroke-width="8"><path d="M44 32h24"/><path d="M44 44h24"/><path d="M50 32v24"/><path d="M44 56l26 24"/></g></symbol>
+  </defs>
+</svg>
+
+<div class="backdrop" aria-hidden="true"><div class="blob b1"></div><div class="blob b2"></div></div>
+
+<!-- ─────────────────────────── Nav ─────────────────────────── -->
+<header class="nav" id="nav">
+  <div class="wrap nav-inner">
+    <a href="#top" class="brand" aria-label="Nimbu home">
+      <span class="brand-mark"><svg class="icon" style="color:#10130a"><use href="#i-rupee"/></svg></span>
+      nimbu
+    </a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="#how">How it works</a>
+      <a href="#features">Features</a>
+      <a href="#insights">Insights</a>
+      <a href="#privacy">Privacy</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <div class="nav-actions">
+      <button class="icon-btn theme-toggle" id="themeToggle" aria-label="Switch colour theme">
+        <svg class="icon i-moon"><use href="#i-moon"/></svg>
+        <svg class="icon i-sun"><use href="#i-sun"/></svg>
+      </button>
+      <a href="#get" class="btn btn-primary nav-cta">Coming soon</a>
+      <button class="icon-btn menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+        <svg class="icon"><use href="#i-menu"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+<nav class="mobile-menu" id="mobileMenu" aria-label="Mobile">
+  <a href="#how">How it works</a>
+  <a href="#features">Features</a>
+  <a href="#insights">Insights</a>
+  <a href="#privacy">Privacy</a>
+  <a href="#faq">FAQ</a>
+</nav>
+
+<main id="top">
+
+<!-- ─────────────────────────── Hero ─────────────────────────── -->
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <span class="pill fade-up"><b><i class="pulse-dot"></i>Android</b> Coming soon on Google Play</span>
+      <h1>
+        <span class="line"><span>Expenses that</span></span>
+        <span class="line"><span><span class="hl">track</span> themselves.</span></span>
+      </h1>
+      <p class="lede fade-up d1">Nimbu reads the transaction SMS your bank already sends and turns every UPI payment and card swipe into a tidy, categorised entry, right on your phone. No sign-up. No servers. No typing.</p>
+      <div class="hero-ctas fade-up d2">
+        <a href="#get" class="btn btn-primary play-badge">
+          <svg class="icon"><use href="#i-android"/></svg>
+          <span class="pb-text"><span class="pb-small">Coming soon on</span><span class="pb-big">Google Play</span></span>
+        </a>
+        <a href="#how" class="btn btn-ghost">See how it works <svg class="icon"><use href="#i-chev"/></svg></a>
+      </div>
+      <div class="trust fade-up d3">
+        <span><svg class="icon"><use href="#i-check"/></svg>No account needed</span>
+        <span><svg class="icon"><use href="#i-check"/></svg>Data stays on your phone</span>
+        <span><svg class="icon"><use href="#i-check"/></svg>30+ banks recognised</span>
+      </div>
+    </div>
+
+    <div class="stage" id="stage">
+      <div class="stage-glow" aria-hidden="true"></div>
+      <div class="ring r1" aria-hidden="true"></div>
+      <div class="ring r2" aria-hidden="true"></div>
+
+      <div class="float f1" data-depth="18" aria-hidden="true"><div class="float-inner">
+        <span class="tile sm" style="--t:var(--amber)"><svg class="icon"><use href="#i-food"/></svg></span>
+        <div><small>Auto-categorised</small><b>Food &amp; Dining</b></div>
+      </div></div>
+      <div class="float f2" data-depth="-24" aria-hidden="true"><div class="float-inner">
+        <span class="tile sm" style="--t:var(--lime)"><svg class="icon"><use href="#i-lock"/></svg></span>
+        <div><small>Read on your phone</small><b>Nothing uploaded</b></div>
+      </div></div>
+      <div class="float f3" data-depth="14" aria-hidden="true"><div class="float-inner">
+        <svg class="mini-donut" viewBox="0 0 42 42"><circle cx="21" cy="21" r="15.9" fill="none" stroke="var(--surface-2)" stroke-width="6"/><circle cx="21" cy="21" r="15.9" fill="none" stroke="#f5b33c" stroke-width="6" stroke-dasharray="38 62" stroke-dashoffset="25"/><circle cx="21" cy="21" r="15.9" fill="none" stroke="#8ce01e" stroke-width="6" stroke-dasharray="24 76" stroke-dashoffset="-13"/><circle cx="21" cy="21" r="15.9" fill="none" stroke="#3b82f6" stroke-width="6" stroke-dasharray="18 82" stroke-dashoffset="-37"/></svg>
+        <div><small>This month</small><b>Spent 12% less</b></div>
+      </div></div>
+
+      <div class="phone hero-phone" id="heroPhone" role="img" aria-label="Nimbu app: a bank SMS arrives and becomes a categorised transaction">
+        <div class="screen">
+          <i class="cam" aria-hidden="true"></i>
+          <div class="app" aria-hidden="true">
+            <div class="app-status"><span class="num">9:41</span><span class="sb-icons"><svg class="icon"><use href="#i-wifi"/></svg><svg class="icon"><use href="#i-battery"/></svg></span></div>
+
+            <div class="notif" id="notif">
+              <i class="scan-line"></i>
+              <div class="notif-head"><span class="notif-app"><svg class="icon"><use href="#i-sms"/></svg></span><span id="nSender">Messages</span><time>now</time></div>
+              <div class="body" id="nBody"></div>
+            </div>
+
+            <div class="app-head">
+              <div><small>Good morning</small><strong>Aarav</strong></div>
+              <span class="app-avatar">A</span>
+            </div>
+            <div class="app-hero">
+              <div class="ah-top"><span class="ah-label">SPENT · THIS MONTH</span><span class="app-seg"><span>W</span><span class="on">M</span><span>Y</span></span></div>
+              <div class="ah-amt num" id="aSpent">₹18,240</div>
+              <div class="ah-sub"><b>▼ 12%</b> vs same days last month</div>
+            </div>
+            <div class="app-tiles">
+              <div class="app-tile inc"><small>Income · this month</small><strong class="num" id="aIncome">₹85,000</strong></div>
+              <div class="app-tile"><small>Total balance</small><strong class="num" id="aBalance">₹2,41,560</strong></div>
+            </div>
+            <div class="app-section"><b>Recent</b><span>See all</span></div>
+            <div class="app-list" id="aList"></div>
+            <div class="app-nav">
+              <span class="on"><svg class="icon"><use href="#i-home"/></svg>Home</span>
+              <span><svg class="icon"><use href="#i-chart"/></svg>Insights</span>
+              <span class="fab"><svg class="icon"><use href="#i-plus"/></svg></span>
+              <span><svg class="icon"><use href="#i-receipt"/></svg>Activity</span>
+              <span><svg class="icon"><use href="#i-gear"/></svg>Settings</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────────────────────── Banks ─────────────────────────── -->
+<section class="banks" aria-label="Supported banks">
+  <p class="banks-label">Recognises alerts from <b>30+ banks</b> in India</p>
+  <div class="marquee" data-banks="HDFC Bank|ICICI Bank|SBI|Axis Bank|Kotak|PNB|AU Bank|Bank of Baroda|Canara Bank|Union Bank|IDFC First|Yes Bank|IndusInd|Federal Bank|RBL Bank|IDBI Bank"><div class="marquee-track"></div></div>
+  <div class="marquee rev" data-banks="Bank of India|Central Bank|Indian Bank|Indian Overseas|UCO Bank|Bank of Maharashtra|Bandhan Bank|Karnataka Bank|Karur Vysya|South Indian Bank|Citi|HSBC|Standard Chartered|American Express|DBS Bank|Paytm Bank"><div class="marquee-track"></div></div>
+</section>
+
+<!-- ─────────────────────────── How it works ─────────────────────────── -->
+<section class="section" id="how">
+  <div class="wrap">
+    <div class="section-head center reveal">
+      <span class="eyebrow">How it works</span>
+      <h2>From bank SMS to sorted, <span class="accent">in a blink.</span></h2>
+      <p class="lede">Your bank already texts you every time money moves. Nimbu reads those alerts and does the bookkeeping for you.</p>
+    </div>
+
+    <div class="steps" id="steps">
+      <div class="steps-line" aria-hidden="true"><svg viewBox="0 0 100 2" preserveAspectRatio="none"><line class="base" x1="0" y1="1" x2="100" y2="1" vector-effect="non-scaling-stroke" stroke-width="2"/><line class="prog" x1="0" y1="1" x2="100" y2="1" pathLength="1" vector-effect="non-scaling-stroke" stroke-width="2"/></svg></div>
+
+      <article class="card step reveal" style="--delay:.0s">
+        <span class="step-num">1</span>
+        <h3>A bank SMS arrives</h3>
+        <p>You pay by UPI or swipe a card. Your bank sends its usual alert, just like today.</p>
+        <div class="step-visual">
+          <div class="sms-from"><svg class="icon"><use href="#i-sms"/></svg>VM-KOTAKB · 9:12 AM</div>
+          <div class="sms-bubble pop" style="--pd:.2s">Sent Rs.1,250.00 from Kotak Bank AC X4470 to ZEPTO on 28-09-26. UPI Ref 426598114420.</div>
+        </div>
+      </article>
+
+      <article class="card step reveal" style="--delay:.12s">
+        <span class="step-num">2</span>
+        <h3>Nimbu reads it on your phone</h3>
+        <p>It picks out the amount, account, merchant and date. It all happens on the device.</p>
+        <div class="step-visual">
+          <div class="parse-text">Sent <mark class="m1">Rs.1,250.00</mark> from Kotak Bank <mark class="m2">AC X4470</mark> to <mark class="m3">ZEPTO</mark> on <mark class="m4">28-09-26</mark>.</div>
+          <div class="parse-legend pop" style="--pd:1.4s"><span>Amount</span><span>Account</span><span>Merchant</span><span>Date</span></div>
+        </div>
+      </article>
+
+      <article class="card step reveal" style="--delay:.24s">
+        <span class="step-num">3</span>
+        <h3>It lands, already sorted</h3>
+        <p>Category, account and tags filled in. A quick review notification lets you change anything.</p>
+        <div class="step-visual">
+          <div class="result-row pop" style="--pd:.3s">
+            <span class="tile" style="--t:var(--green)"><svg class="icon"><use href="#i-cart"/></svg></span>
+            <div class="meta"><b>Zepto</b><small>Groceries · Kotak ••4470</small></div>
+            <span class="amt num">−₹1,250</span>
+          </div>
+          <div class="tagrow pop" style="--pd:.6s"><span class="tagpill"><svg class="icon"><use href="#i-tag"/></svg>quick-commerce</span><span class="tagpill"><svg class="icon"><use href="#i-tag"/></svg>zepto</span></div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────────────────────── Features ─────────────────────────── -->
+<section class="section" id="features" style="padding-top:0">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Everything in one place</span>
+      <h2>A complete money app, <span class="accent">minus the chores.</span></h2>
+      <p class="lede">Auto-capture is only the start. Nimbu covers budgets, bills, investments and loans, and backs it all up.</p>
+    </div>
+
+    <div class="bento">
+      <!-- Review -->
+      <article class="card feat w3 reveal">
+        <div class="feat-head"><span class="tile lg" style="--t:var(--lime)"><svg class="icon"><use href="#i-bell"/></svg></span><h3>Review in a single tap</h3></div>
+        <p>Every captured spend shows a notification with your most-used categories as buttons. Pick one, add a note, or ignore it. If you do nothing, it's saved on its own.</p>
+        <div class="feat-visual">
+          <div class="rv-card" id="review">
+            <div class="rv-top">
+              <span class="tile" style="--t:var(--blue)"><svg class="icon"><use href="#i-car"/></svg></span>
+              <div class="meta"><b class="num">₹612 spent · Uber</b><small>Pick a category or tap to edit</small></div>
+              <div class="countdown run"><svg viewBox="0 0 50 50"><circle class="track" cx="25" cy="25" r="20"/><circle class="bar" cx="25" cy="25" r="20"/></svg><span class="num" id="rvSec">0:60</span></div>
+            </div>
+            <div class="rv-actions" id="rvActions">
+              <span class="chipbtn" data-k="0"><svg class="icon"><use href="#i-car"/></svg>Transport</span>
+              <span class="chipbtn" data-k="1"><svg class="icon"><use href="#i-food"/></svg>Food</span>
+              <span class="chipbtn ghost"><svg class="icon"><use href="#i-x"/></svg>Ignore</span>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Voice -->
+      <article class="card feat w3 reveal" style="--delay:.08s">
+        <div class="feat-head"><span class="tile lg" style="--t:var(--purple)"><svg class="icon"><use href="#i-mic"/></svg></span><h3>Just say it</h3></div>
+        <p>Paid in cash? Tap the mic and say what happened. Nimbu fills in the amount, category and account, and you confirm.</p>
+        <div class="feat-visual">
+          <div class="voice" id="voice">
+            <div class="voice-top">
+              <span class="mic-btn"><svg class="icon"><use href="#i-mic"/></svg></span>
+              <div class="wave" aria-hidden="true"><i style="--i:0"></i><i style="--i:1"></i><i style="--i:2"></i><i style="--i:3"></i><i style="--i:4"></i><i style="--i:5"></i><i style="--i:6"></i><i style="--i:7"></i><i style="--i:8"></i><i style="--i:9"></i><i style="--i:10"></i><i style="--i:11"></i><i style="--i:12"></i><i style="--i:13"></i><i style="--i:14"></i><i style="--i:15"></i><i style="--i:16"></i><i style="--i:17"></i></div>
+            </div>
+            <div class="voice-text" id="voiceText">“spent 500 on groceries, paid via GPay”<span class="caret"></span></div>
+            <div class="voice-out" id="voiceOut"><span class="on"><em>Amount</em>₹500</span><span class="on"><em>Category</em>Groceries</span><span class="on"><em>Account</em>GPay wallet</span></div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Budgets -->
+      <article class="card feat w2 reveal">
+        <div class="feat-head"><span class="tile lg" style="--t:var(--amber)"><svg class="icon"><use href="#i-target"/></svg></span><h3>Budgets that nudge</h3></div>
+        <p>Set a monthly limit overall or for each category. Nimbu tells you where you'll end up at your current pace.</p>
+        <div class="feat-visual bud">
+          <div class="bud-row"><div class="top"><span>Food &amp; Dining</span><span class="num">₹5,760 / ₹8,000</span></div><div class="track"><i style="--w:72%;--c:var(--amber)"></i></div></div>
+          <div class="bud-row"><div class="top"><span>Shopping</span><span class="num">₹2,700 / ₹6,000</span></div><div class="track"><i style="--w:45%;--c:var(--pink);--delay:.15s"></i></div></div>
+          <div class="bud-row"><div class="top"><span>Fuel</span><span class="num">₹3,640 / ₹4,000</span></div><div class="track"><i style="--w:91%;--c:var(--expense);--delay:.3s"></i></div></div>
+        </div>
+      </article>
+
+      <!-- Recurring -->
+      <article class="card feat w2 reveal" style="--delay:.08s">
+        <div class="feat-head"><span class="tile lg" style="--t:var(--blue)"><svg class="icon"><use href="#i-repeat"/></svg></span><h3>Bills &amp; SIPs on autopilot</h3></div>
+        <p>Rent, subscriptions and SIPs are logged by themselves when they're due, so the month always adds up.</p>
+        <div class="feat-visual rec">
+          <div class="rec-row"><span class="tile sm" style="--t:var(--expense)"><svg class="icon"><use href="#i-film"/></svg></span><div class="meta"><b>Netflix</b><small>Monthly · 5 Oct<span class="due-chip">in 7 days</span></small></div><span class="amt num">₹649</span></div>
+          <div class="rec-row"><span class="tile sm" style="--t:var(--purple)"><svg class="icon"><use href="#i-bolt"/></svg></span><div class="meta"><b>Electricity</b><small>Monthly · 12 Oct</small></div><span class="amt num">₹1,640</span></div>
+          <div class="rec-row"><span class="tile sm" style="--t:var(--lime)"><svg class="icon"><use href="#i-invest"/></svg></span><div class="meta"><b>Nifty 50 Index SIP</b><small>Monthly · 10 Oct</small></div><span class="amt num">₹5,000</span></div>
+        </div>
+      </article>
+
+      <!-- Lending -->
+      <article class="card feat w2 reveal" style="--delay:.16s">
+        <div class="feat-head"><span class="tile lg" style="--t:var(--amber)"><svg class="icon"><use href="#i-hand"/></svg></span><h3>Money lent, remembered</h3></div>
+        <p>Record what you lend and when you expect it back. Nimbu reminds you after the due date and clears it when it's repaid.</p>
+        <div class="feat-visual lend">
+          <div class="lend-card"><svg class="icon bell" style="font-size:24px"><use href="#i-bell"/></svg><div class="meta"><b>Rohan</b><small>Due back in 3 days</small></div><span class="amt num">₹2,000</span></div>
+          <div class="lend-card" style="opacity:.6"><svg class="icon" style="font-size:24px;color:var(--income)"><use href="#i-check"/></svg><div class="meta"><b>Meera</b><small>Repaid on 14 Sep</small></div><span class="amt num" style="color:var(--income)">₹1,200</span></div>
+        </div>
+      </article>
+
+      <!-- Investments -->
+      <article class="card feat w4 wide-md reveal">
+        <div class="feat-head"><span class="tile lg" style="--t:var(--green)"><svg class="icon"><use href="#i-trendup"/></svg></span><h3>Investments, priced every day</h3></div>
+        <p>Search any mutual fund by name and Nimbu updates its value from AMFI's daily NAV. Crypto uses live prices; add stocks and gold by hand. SIP instalments are logged when they're due.</p>
+        <div class="feat-visual inv">
+          <div class="inv-chart">
+            <small>Portfolio value</small>
+            <strong class="num">₹3,84,920</strong>
+            <span class="gain num">▲ ₹41,280 · 12.0%</span>
+            <svg viewBox="0 0 300 110" preserveAspectRatio="none" aria-hidden="true">
+              <defs><linearGradient id="invGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#cbf24a" stop-opacity=".35"/><stop offset="1" stop-color="#cbf24a" stop-opacity="0"/></linearGradient></defs>
+              <path class="inv-area" d="M0 92 C 30 88, 45 80, 70 82 S 110 64, 135 66 S 170 52, 195 56 S 235 30, 260 34 S 290 16, 300 14 L300 110 L0 110Z"/>
+              <path class="inv-line" pathLength="1" d="M0 92 C 30 88, 45 80, 70 82 S 110 64, 135 66 S 170 52, 195 56 S 235 30, 260 34 S 290 16, 300 14"/>
+            </svg>
+          </div>
+          <div class="holdings">
+            <div class="hold"><span class="tile sm" style="--t:var(--lime)"><svg class="icon"><use href="#i-invest"/></svg></span><div class="meta"><b>Nifty 50 Index Fund<span class="src src-nav">NAV</span></b><small>Direct · Growth</small></div><div class="amt num">₹1,62,400<small>+14.2%</small></div></div>
+            <div class="hold"><span class="tile sm" style="--t:var(--lime)"><svg class="icon"><use href="#i-invest"/></svg></span><div class="meta"><b>Flexi Cap Fund<span class="src src-nav">NAV</span></b><small>Direct · Growth</small></div><div class="amt num">₹1,08,760<small>+11.8%</small></div></div>
+            <div class="hold"><span class="tile sm" style="--t:var(--expense)"><svg class="icon"><use href="#i-coins"/></svg></span><div class="meta"><b>Bitcoin<span class="src src-live">LIVE</span></b><small>0.0082 BTC</small></div><div class="amt num">₹61,480<small>+9.4%</small></div></div>
+            <div class="hold"><span class="tile sm" style="--t:var(--amber)"><svg class="icon"><use href="#i-coins"/></svg></span><div class="meta"><b>Gold<span class="src src-man">MANUAL</span></b><small>8 g</small></div><div class="amt num">₹52,280<small>+6.1%</small></div></div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Widgets -->
+      <article class="card feat w2 wide-md reveal" style="--delay:.08s">
+        <div class="feat-head"><span class="tile lg" style="--t:var(--teal)"><svg class="icon"><use href="#i-grid"/></svg></span><h3>Home-screen widgets</h3></div>
+        <p>Balance, spending, income and a category donut, visible without opening the app.</p>
+        <div class="feat-visual widgets">
+          <div class="wdg lime"><small>BALANCE</small><strong class="num">₹2,41,560</strong></div>
+          <div class="wdg red"><small>SPENT · SEP</small><strong class="num">₹18,240</strong></div>
+          <div class="wdg cats">
+            <svg viewBox="0 0 42 42" aria-hidden="true"><circle cx="21" cy="21" r="15.9" fill="none" stroke="#1b1d23" stroke-width="6"/><circle cx="21" cy="21" r="15.9" fill="none" stroke="#f5b33c" stroke-width="6" stroke-dasharray="31 69" stroke-dashoffset="25"/><circle cx="21" cy="21" r="15.9" fill="none" stroke="#fb923c" stroke-width="6" stroke-dasharray="19 81" stroke-dashoffset="-7"/><circle cx="21" cy="21" r="15.9" fill="none" stroke="#f472b6" stroke-width="6" stroke-dasharray="14 86" stroke-dashoffset="-27"/><circle cx="21" cy="21" r="15.9" fill="none" stroke="#8ce01e" stroke-width="6" stroke-dasharray="13 87" stroke-dashoffset="-42"/><circle cx="21" cy="21" r="15.9" fill="none" stroke="#5d5f57" stroke-width="6" stroke-dasharray="18 82" stroke-dashoffset="-56"/></svg>
+            <div class="wdg-legend"><div><i style="--c:#f5b33c"></i>Food &amp; Dining<span>32%</span></div><div><i style="--c:#fb923c"></i>Fuel<span>20%</span></div><div><i style="--c:#f472b6"></i>Shopping<span>15%</span></div><div><i style="--c:#8ce01e"></i>Groceries<span>14%</span></div></div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Tags & search -->
+      <article class="card feat w3 reveal">
+        <div class="feat-head"><span class="tile lg" style="--t:var(--pink)"><svg class="icon"><use href="#i-tag"/></svg></span><h3>Tags, filters &amp; search</h3></div>
+        <p>Tag a trip or a project, then filter by date, category, account, tag or amount. Search even matches amounts like “4,660”. Common merchants such as Zepto, Swiggy and Uber are tagged for you.</p>
+        <div class="feat-visual tagrow">
+          <span class="tagpill"><svg class="icon"><use href="#i-tag"/></svg>goa-trip</span>
+          <span class="tagpill"><svg class="icon"><use href="#i-tag"/></svg>quick-commerce</span>
+          <span class="tagpill"><svg class="icon"><use href="#i-tag"/></svg>cabs</span>
+          <span class="tagpill"><svg class="icon"><use href="#i-tag"/></svg>food-delivery</span>
+          <span class="tagpill"><svg class="icon"><use href="#i-tag"/></svg>work</span>
+        </div>
+      </article>
+
+      <!-- Export -->
+      <article class="card feat w3 reveal" style="--delay:.08s">
+        <div class="feat-head"><span class="tile lg" style="--t:var(--indigo)"><svg class="icon"><use href="#i-download"/></svg></span><h3>Export &amp; import anything</h3></div>
+        <p>Export any filtered list as a PDF report with charts, an Excel sheet or a CSV. You can also bring in an old bank statement or spreadsheet; duplicates are skipped.</p>
+        <div class="feat-visual exports">
+          <div class="file"><span class="file-ic" style="--c:#ff6b57">PDF</span>Report</div>
+          <div class="file"><span class="file-ic" style="--c:#4c9a0f">XLSX</span>Excel</div>
+          <div class="file"><span class="file-ic" style="--c:#3b82f6">CSV</span>Sheet</div>
+          <div class="file"><span class="file-ic" style="--c:#8b8e82"><svg class="icon" style="font-size:16px"><use href="#i-upload"/></svg></span>Import</div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────────────────────── Insights ─────────────────────────── -->
+<section class="section" id="insights" style="padding-top:0">
+  <div class="wrap insights">
+    <div class="reveal">
+      <span class="eyebrow">Insights</span>
+      <h2 style="margin-top:18px">See where it <span class="accent">actually</span> goes.</h2>
+      <p class="lede" style="margin-top:18px">Pick a week, month, year or your own dates. Nimbu compares it with the same days last period and tells you, in plain words, what changed.</p>
+      <div class="tabs" role="tablist" aria-label="Insight charts" id="tabs">
+        <button class="tab" role="tab" aria-selected="true" aria-controls="pane-trend" id="tab-trend" data-pane="trend"><span class="tile" style="--t:var(--lime)"><svg class="icon"><use href="#i-chart"/></svg></span><b>Trend</b><span>Income vs spending, period by period</span><i class="prog"></i></button>
+        <button class="tab" role="tab" aria-selected="false" aria-controls="pane-cats" id="tab-cats" data-pane="cats" tabindex="-1"><span class="tile" style="--t:var(--amber)"><svg class="icon"><use href="#i-target"/></svg></span><b>Categories</b><span>Where each rupee went, ranked</span><i class="prog"></i></button>
+        <button class="tab" role="tab" aria-selected="false" aria-controls="pane-flow" id="tab-flow" data-pane="flow" tabindex="-1"><span class="tile" style="--t:var(--blue)"><svg class="icon"><use href="#i-invest"/></svg></span><b>Cash flow &amp; net worth</b><span>How your money moved over time</span><i class="prog"></i></button>
+      </div>
+    </div>
+
+    <div class="card chart-card reveal scale" style="--delay:.1s">
+      <div class="chart-top">
+        <div><small id="cLabel">Spent · September</small><strong class="num" id="cValue">₹18,240</strong></div>
+        <span class="delta" id="cDelta">▼ 12% vs last month</span>
+      </div>
+      <div class="chart-area">
+        <div class="chart-pane on" id="pane-trend" role="tabpanel" aria-labelledby="tab-trend">
+          <svg id="barsSvg" viewBox="0 0 520 250" aria-label="Bar chart of income and spending from April to September"></svg>
+          <div class="legend" style="margin-top:10px"><span><i style="--c:var(--income)"></i>Income</span><span><i style="--c:var(--expense)"></i>Spending</span></div>
+        </div>
+        <div class="chart-pane" id="pane-cats" role="tabpanel" aria-labelledby="tab-cats">
+          <div class="donut-wrap">
+            <svg id="donutSvg" viewBox="0 0 200 200" aria-label="Donut chart of September spending by category"></svg>
+            <div class="cat-list" id="catList"></div>
+          </div>
+        </div>
+        <div class="chart-pane" id="pane-flow" role="tabpanel" aria-labelledby="tab-flow">
+          <svg id="lineSvg" viewBox="0 0 520 250" aria-label="Line chart of net worth from April to September"></svg>
+          <div class="legend" style="margin-top:10px"><span><i style="--c:var(--lime)"></i>Net worth, month end</span></div>
+        </div>
+      </div>
+      <div class="note"><svg class="icon"><use href="#i-sparkle"/></svg><span id="cNote">At this pace you'll finish about <b>₹2,400 under budget</b> this month.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────────────────────── Screens ─────────────────────────── -->
+<section class="section" id="screens" style="padding-top:0;padding-bottom:40px">
+  <div class="wrap">
+    <div class="section-head center reveal" style="margin-bottom:0">
+      <span class="eyebrow">A closer look</span>
+      <h2>Designed to be <span class="accent">glanced at.</span></h2>
+      <p class="lede">Dark by default, with a light theme too. Every screen shows you what matters first.</p>
+    </div>
+  </div>
+  <div class="gallery-wrap reveal">
+    <div class="gallery" id="gallery" tabindex="0" aria-label="App screenshots">
+      <figure class="shot"><div class="phone"><div class="screen"><img src="assets/screens/home.webp" alt="Home screen showing money spent this month, income, balance and recent transactions" loading="lazy" width="720" height="1514"></div></div><figcaption><b>Home</b><span>This month at a glance</span></figcaption></figure>
+      <figure class="shot"><div class="phone"><div class="screen"><img src="assets/screens/transactions.webp" alt="Transactions list grouped by day with SMS badges" loading="lazy" width="720" height="1514"></div></div><figcaption><b>Transactions</b><span>Grouped by day, filter anything</span></figcaption></figure>
+      <figure class="shot"><div class="phone"><div class="screen"><img src="assets/screens/insights-trend.webp" alt="Insights screen with a trend bar chart" loading="lazy" width="720" height="1514"></div></div><figcaption><b>Insights</b><span>Compared with last period</span></figcaption></figure>
+      <figure class="shot"><div class="phone"><div class="screen"><img src="assets/screens/insights-categories.webp" alt="Category donut chart with ranked categories" loading="lazy" width="720" height="1514"></div></div><figcaption><b>Categories</b><span>Every category, ranked</span></figcaption></figure>
+      <figure class="shot"><div class="phone"><div class="screen"><img src="assets/screens/txn-detail.webp" alt="Transaction detail showing the original bank SMS" loading="lazy" width="720" height="1514"></div></div><figcaption><b>Source SMS</b><span>See exactly where it came from</span></figcaption></figure>
+      <figure class="shot"><div class="phone"><div class="screen"><img src="assets/screens/invest.webp" alt="Investments screen with portfolio value and holdings" loading="lazy" width="720" height="1514"></div></div><figcaption><b>Investments</b><span>Funds, crypto, stocks &amp; gold</span></figcaption></figure>
+      <figure class="shot"><div class="phone"><div class="screen"><img src="assets/screens/budgets.webp" alt="Budgets screen with category progress bars" loading="lazy" width="720" height="1514"></div></div><figcaption><b>Budgets</b><span>Overall and per category</span></figcaption></figure>
+      <figure class="shot"><div class="phone"><div class="screen"><img src="assets/screens/lending.webp" alt="Lending screen listing money lent" loading="lazy" width="720" height="1514"></div></div><figcaption><b>Lending</b><span>Who owes you, and when</span></figcaption></figure>
+      <figure class="shot"><div class="phone"><div class="screen"><img src="assets/screens/home-light.webp" alt="Home screen in the light theme" loading="lazy" width="720" height="1514"></div></div><figcaption><b>Light theme</b><span>Same lime, brighter room</span></figcaption></figure>
+    </div>
+    <div class="gallery-ctrl">
+      <button class="icon-btn" id="gPrev" aria-label="Previous screenshot"><svg class="icon back-icon"><use href="#i-chev"/></svg></button>
+      <button class="icon-btn" id="gNext" aria-label="Next screenshot"><svg class="icon"><use href="#i-chev"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────────────────────── Privacy ─────────────────────────── -->
+<section class="section" id="privacy">
+  <div class="wrap privacy">
+    <div class="vault reveal scale" aria-hidden="true">
+      <div class="orbit o1"></div><div class="orbit o2"></div><div class="orbit o3"></div>
+      <div class="spin"><div class="sat"><span class="tile" style="--t:var(--blue);--s:42px"><svg class="icon"><use href="#i-cloud"/></svg></span></div></div>
+      <div class="spin s2"><div class="sat"><span class="tile" style="--t:var(--purple);--s:38px"><svg class="icon"><use href="#i-eye"/></svg></span></div></div>
+      <div class="vault-core"><svg class="icon"><use href="#i-shield"/></svg></div>
+    </div>
+    <div>
+      <div class="reveal">
+        <span class="eyebrow">Private by design</span>
+        <h2 style="margin-top:18px">Your money data lives on <span class="accent">your phone.</span></h2>
+        <p class="lede" style="margin-top:18px">There's no Nimbu server and no account to create. Your transactions are stored in the app on your phone, and nowhere else unless you choose to back them up.</p>
+      </div>
+      <div class="priv-list">
+        <div class="card priv reveal"><span class="tile" style="--t:var(--lime)"><svg class="icon"><use href="#i-sms"/></svg></span><b>SMS reading is off until you turn it on</b><span>You choose when Nimbu starts reading messages, and you can sync past messages for just the period you pick.</span></div>
+        <div class="card priv reveal" style="--delay:.06s"><span class="tile" style="--t:var(--blue)"><svg class="icon"><use href="#i-cloud"/></svg></span><b>Encrypted backups, to places you own</b><span>Back up to a file or to your own Google Drive, encrypted with AES-256 and a password only you know.</span></div>
+        <div class="card priv reveal" style="--delay:.12s"><span class="tile" style="--t:var(--purple)"><svg class="icon"><use href="#i-lock"/></svg></span><b>App lock and hidden balances</b><span>Lock the app with a PIN or your fingerprint, and hide every balance with one tap.</span></div>
+        <div class="card priv reveal" style="--delay:.18s"><span class="tile" style="--t:var(--teal)"><svg class="icon"><use href="#i-shield"/></svg></span><b>No ads, no analytics, no tracking</b><span>The only internet use is fetching fund and crypto prices, and your Drive backups if you turn them on.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────────────────────── Numbers ─────────────────────────── -->
+<section class="section" style="padding-top:0">
+  <div class="wrap stats">
+    <div class="card stat reveal"><strong class="num" data-count="30" data-suffix="+">0</strong><span>banks in India recognised</span></div>
+    <div class="card stat reveal" style="--delay:.06s"><strong class="num" data-count="0">0</strong><span>accounts to create</span></div>
+    <div class="card stat reveal" style="--delay:.12s"><strong class="num" data-count="4">0</strong><span>home-screen widgets</span></div>
+    <div class="card stat reveal" style="--delay:.18s"><strong class="num" data-count="256" data-suffix="-bit">0</strong><span>AES encryption for backups</span></div>
+  </div>
+</section>
+
+<!-- ─────────────────────────── FAQ ─────────────────────────── -->
+<section class="section" id="faq" style="padding-top:0">
+  <div class="wrap">
+    <div class="section-head center reveal">
+      <span class="eyebrow">FAQ</span>
+      <h2>Good questions.</h2>
+    </div>
+    <div class="faq">
+      <details class="card qa reveal"><summary>How does Nimbu know what I spent?<span class="pm"><svg class="icon"><use href="#i-plus"/></svg></span></summary><div class="ans"><div><p>Your bank sends an SMS for every UPI payment, card swipe and credit. Once you turn on Auto-capture, Nimbu reads those alerts on your phone and adds each one as a transaction. You can also import past messages for a period you choose; you review everything before it's saved.</p></div></div></details>
+      <details class="card qa reveal"><summary>Which banks does it work with?<span class="pm"><svg class="icon"><use href="#i-plus"/></svg></span></summary><div class="ans"><div><p>More than 30 banks in India, including HDFC, ICICI, SBI, Axis, Kotak, PNB, AU, Bank of Baroda, Yes Bank and IndusInd. If a message isn't recognised, paste it into Nimbu once and it learns that format for next time.</p></div></div></details>
+      <details class="card qa reveal"><summary>Is my data uploaded anywhere?<span class="pm"><svg class="icon"><use href="#i-plus"/></svg></span></summary><div class="ans"><div><p>No. There's no Nimbu server and no account. Your data stays in the app on your phone. It only leaves if you back it up, either to a file you save or to your own Google Drive, and those backups are encrypted with your password. Read the <a href="privacy/">privacy policy</a> for details.</p></div></div></details>
+      <details class="card qa reveal"><summary>What does Nimbu use the internet for?<span class="pm"><svg class="icon"><use href="#i-plus"/></svg></span></summary><div class="ans"><div><p>Three things: downloading daily mutual fund NAVs from AMFI, fetching crypto prices from CoinGecko, and Google Drive backups if you turn them on. There are no ads and no analytics.</p></div></div></details>
+      <details class="card qa reveal"><summary>What happens when I change phones?<span class="pm"><svg class="icon"><use href="#i-plus"/></svg></span></summary><div class="ans"><div><p>Back up to a file or to Google Drive, install Nimbu on the new phone and choose “I have a backup”. Transactions, accounts, budgets, investments, receipts and settings all come back. You'll need your backup password; without it, the backup can't be opened.</p></div></div></details>
+      <details class="card qa reveal"><summary>Can I add cash spends too?<span class="pm"><svg class="icon"><use href="#i-plus"/></svg></span></summary><div class="ans"><div><p>Yes. Tap + to add one by hand, use the mic to say it out loud, or import a CSV or Excel file. You can attach a receipt photo or PDF to any transaction.</p></div></div></details>
+      <details class="card qa reveal"><summary>Is there an iPhone version?<span class="pm"><svg class="icon"><use href="#i-plus"/></svg></span></summary><div class="ans"><div><p>Not at the moment. Nimbu is Android-only because iOS doesn't let apps read SMS, which is what makes auto-capture possible.</p></div></div></details>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────────────────────── CTA ─────────────────────────── -->
+<section class="section" id="get" style="padding-top:0;padding-bottom:0">
+  <div class="wrap">
+    <div class="cta reveal scale">
+      <div>
+        <span class="eyebrow" style="color:#cbf24a">Coming soon</span>
+        <h2 style="margin-top:18px">Stop typing expenses. <span style="color:#cbf24a">Start seeing them.</span></h2>
+        <p>Nimbu is coming soon to Google Play. Drop us a line and we'll let you know the day it's live.</p>
+        <div class="ctas">
+          <a class="btn btn-primary" data-mail="nimbu@keshavbits.tech" data-subject="Tell me when Nimbu launches" href="mailto:nimbu@keshavbits.tech?subject=Tell%20me%20when%20Nimbu%20launches"><svg class="icon"><use href="#i-mail"/></svg>Notify me</a>
+          <a class="btn btn-ghost" href="#features">Explore features</a>
+        </div>
+      </div>
+      <div class="cta-mark" aria-hidden="true"><svg viewBox="31 25 46 62" fill="none" stroke="#10130a" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"><g class="rs"><path pathLength="1" d="M44 32h24"/><path pathLength="1" d="M44 44h24"/><path pathLength="1" d="M50 32v24"/><path pathLength="1" d="M44 56l26 24"/></g></svg></div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="wrap footer-inner">
+    <div style="display:grid;gap:10px">
+      <a href="#top" class="brand"><span class="brand-mark"><svg class="icon" style="color:#10130a"><use href="#i-rupee"/></svg></span>nimbu</a>
+      <p>© <span id="year">2026</span> KeshavBits. Made in India.</p>
+    </div>
+    <div class="footer-links">
+      <a href="#features">Features</a>
+      <a href="#privacy">Privacy</a>
+      <a href="privacy/">Privacy policy</a>
+      <a href="mailto:nimbu@keshavbits.tech">nimbu@keshavbits.tech</a>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/site.js" defer></script>
+</body>
+</html>

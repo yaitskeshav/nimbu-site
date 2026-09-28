@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://nimbu.keshavbits.tech/sitemap.xml
