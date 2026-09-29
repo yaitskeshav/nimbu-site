@@ -67,7 +67,7 @@
         <thead><tr><th>Data</th><th>Why</th><th>Where it's stored</th></tr></thead>
         <tbody>
           <tr><td>Transactions, accounts, categories, tags, budgets, recurring items, investments and lending records</td><td>The core features of the app</td><td>On your phone</td></tr>
-          <tr><td>SMS messages Nimbu checks (sender, text, time)</td><td>Detecting transactions, showing the original SMS behind a transaction and avoiding duplicates</td><td>On your phone</td></tr>
+          <tr><td>Bank and card SMS (sender, text, time)</td><td>Detecting transactions, showing the original SMS behind a transaction and avoiding duplicates</td><td>On your phone</td></tr>
           <tr><td>Receipts (images or PDFs) and a profile photo, if you add them</td><td>Attaching proof to a transaction; personalising the app</td><td>On your phone</td></tr>
           <tr><td>Your name, if you enter it</td><td>Greeting you in the app</td><td>On your phone</td></tr>
           <tr><td>App-lock PIN (salted and hashed), backup password and settings</td><td>Security and preferences</td><td>On your phone, with secrets protected by Android Keystore</td></tr>
@@ -78,9 +78,9 @@
     <h2>3. SMS messages</h2>
     <p>Auto-capture is <strong>off by default</strong>. Nimbu asks for the SMS permission only when you turn it on in the app, and you can turn it off, or revoke the permission in Android settings, at any time.</p>
     <ul>
-      <li>When Auto-capture is on, Nimbu checks new incoming SMS <strong>on your phone</strong> to find transaction alerts from banks and card issuers, and records the amount, account, merchant and date as a transaction.</li>
+      <li>When Auto-capture is on, Nimbu looks only at SMS from <strong>recognised bank and card senders</strong> (plus any sender you add by pasting one of its messages). It turns their transaction alerts into transactions, recording the amount, account, merchant and date, <strong>on your phone</strong>. Messages from anyone else, such as personal messages, are not read or stored.</li>
       <li>If you choose <strong>Sync SMS</strong>, Nimbu scans your inbox for bank messages in the period you pick and shows you a preview. Nothing is saved until you confirm.</li>
-      <li>Nimbu keeps a copy of the messages it checks in its on-device database. You can delete old captured messages at any time in <em>Settings → Advanced → Privacy</em>.</li>
+      <li>Nimbu keeps the text of bank messages that became transactions or are waiting in your Review inbox, so you can see the original SMS. For other bank messages it ignores, such as OTPs and offers, it keeps only a fingerprint to avoid processing them twice, not their text. You can delete old captured messages at any time in <em>Settings → Advanced → Privacy</em>.</li>
       <li>SMS content is <strong>never sent to us or to any third party</strong>. It leaves your phone only inside a backup that you create (see section 5).</li>
     </ul>
 
