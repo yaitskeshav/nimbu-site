@@ -45,7 +45,7 @@
   <div class="wrap">
     <span class="eyebrow">Legal</span>
     <h1>Privacy Policy</h1>
-    <p class="meta-line">Effective 28 September 2026 · Applies to the Nimbu app for Android (<code>com.keshavbits.nimbu</code>)</p>
+    <p class="meta-line">Effective 30 September 2026 · Applies to the Nimbu app for Android (<code>com.keshavbits.nimbu</code>)</p>
 
     <div class="card summary">
       <strong style="font-family:var(--display);font-weight:600">The short version</strong>
@@ -54,6 +54,7 @@
         <li>Nimbu reads SMS <strong>only after you turn on Auto-capture</strong>, and processes messages on your phone.</li>
         <li>We <strong>don't collect, receive, sell or share</strong> your data. There are <strong>no ads, analytics or trackers</strong>.</li>
         <li>Backups go only where you send them (a file or your own Google Drive), <strong>encrypted with your password</strong>.</li>
+        <li>Nimbu Pro is bought <strong>through Google Play</strong>. We never see your payment details, and the app only learns whether you have Pro.</li>
       </ul>
     </div>
 
@@ -70,6 +71,7 @@
           <tr><td>Bank and card SMS (sender, text, time)</td><td>Detecting transactions, showing the original SMS behind a transaction and avoiding duplicates</td><td>On your phone</td></tr>
           <tr><td>Receipts (images or PDFs) and a profile photo, if you add them</td><td>Attaching proof to a transaction; personalising the app</td><td>On your phone</td></tr>
           <tr><td>Your name, if you enter it</td><td>Greeting you in the app</td><td>On your phone</td></tr>
+          <tr><td>Nimbu Pro status (which plan you have, whether it's active or renewing)</td><td>Unlocking Pro features, including when you're offline</td><td>On your phone; the purchase itself is held by Google Play</td></tr>
           <tr><td>App-lock PIN (salted and hashed), backup password and settings</td><td>Security and preferences</td><td>On your phone, with secrets protected by Android Keystore</td></tr>
         </tbody>
       </table>
@@ -90,6 +92,7 @@
       <li><strong>Mutual fund prices</strong>: downloads the public daily NAV file from AMFI (Association of Mutual Funds in India). No personal data is sent.</li>
       <li><strong>Crypto prices and search</strong>: requests prices from CoinGecko for the coins you hold, and sends the search text you type when you look up a coin. No personal or financial data is sent.</li>
       <li><strong>Google Drive backup</strong>, only if you connect it (see section 5).</li>
+      <li><strong>Google Play Billing</strong>: to show Pro prices, process a purchase, and check whether you have Pro (see section 6).</li>
     </ul>
     <p>These services receive your device's IP address as part of any internet request and handle it under their own privacy policies.</p>
 
@@ -101,7 +104,15 @@
     </ul>
     <p>You can revoke Nimbu's access to Google Drive at any time from your Google Account's <a href="https://myaccount.google.com/connections" rel="noopener">third-party connections</a> page.</p>
 
-    <h2>6. Other permissions</h2>
+    <h2>6. Purchases (Nimbu Pro)</h2>
+    <ul>
+      <li>Purchases, free trials, renewals and cancellations are handled entirely by <strong>Google Play</strong>, under <a href="https://policies.google.com/privacy" rel="noopener">Google's privacy policy</a>. Your card, UPI or bank details go to Google, never to us or to the app.</li>
+      <li>On your phone, Google Play tells Nimbu which Pro product you own, whether it's active or set to renew, and a purchase token. Nimbu checks the purchase's digital signature, then stores only your Pro status on your phone so Pro works offline. It re-checks with Google Play when you open the app.</li>
+      <li>Google gives us limited order information in Google Play Console, such as the order number, product, date, price and country. We use it to answer support and refund requests. It never includes your transactions or anything else stored in Nimbu.</li>
+      <li>Nimbu Pro status isn't included in backups. After a restore, it's checked again with Google Play.</li>
+    </ul>
+
+    <h2>7. Other permissions</h2>
     <ul>
       <li><strong>Notifications:</strong> to tell you about captured transactions, loan reminders and backup status. Each type can be switched off in the app or in Android settings.</li>
       <li><strong>Run at startup:</strong> so background tasks you enabled (SMS catch-up, due bills and SIPs, reminders, automatic backups) keep working after your phone restarts.</li>
@@ -110,10 +121,10 @@
       <li><strong>Photos and files:</strong> Nimbu opens only the image or document you pick through the Android file picker.</li>
     </ul>
 
-    <h2>7. Sharing and selling</h2>
-    <p>We do not sell, rent, trade or share your data with anyone. Nimbu contains no advertising SDKs, analytics or crash-reporting services, and no trackers.</p>
+    <h2>8. Sharing and selling</h2>
+    <p>We do not sell, rent, trade or share your data with anyone. Nimbu contains no advertising SDKs, analytics or crash-reporting services, and no trackers. The only third-party code that handles purchases is Google's own Play Billing library.</p>
 
-    <h2>8. Keeping and deleting your data</h2>
+    <h2>9. Keeping and deleting your data</h2>
     <p>Your data stays on your phone until you delete it. You can:</p>
     <ul>
       <li>Delete individual transactions, accounts, categories and other records in the app.</li>
@@ -123,16 +134,16 @@
     </ul>
     <p>Because we hold no copy of your data, we can't access, recover, or delete it on your behalf.</p>
 
-    <h2>9. Security</h2>
+    <h2>10. Security</h2>
     <p>Nimbu stores data in the app's private storage, which other apps can't read. Secrets such as your backup password are protected with Android Keystore, backups are encrypted, and you can lock the app with a PIN or biometrics. No method of storage is perfectly secure, so please keep your phone's own screen lock enabled.</p>
 
-    <h2>10. Children</h2>
+    <h2>11. Children</h2>
     <p>Nimbu is not directed at children under 13, and we do not knowingly collect data from anyone. Since all data stays on the device, we don't collect data from children either.</p>
 
-    <h2>11. Changes to this policy</h2>
+    <h2>12. Changes to this policy</h2>
     <p>If Nimbu's data practices change, we'll update this page and change the effective date above. Significant changes will also be mentioned in the app's release notes on Google Play.</p>
 
-    <h2>12. Contact</h2>
+    <h2>13. Contact</h2>
     <p>Questions or requests: <a href="mailto:nimbu@keshavbits.tech">nimbu@keshavbits.tech</a></p>
   </div>
 </main>
