@@ -538,39 +538,6 @@ p { margin: 0; }
 .track i { display: block; height: 100%; width: 0; border-radius: inherit; background: var(--c, var(--lime)); transition: width 1.4s var(--ease); transition-delay: var(--delay, 0s); box-shadow: 0 0 14px -2px var(--c, var(--lime)); }
 .in .track i { width: var(--w); }
 
-/* recurring list */
-.rec { display: grid; gap: 2px; border-radius: 18px; background: var(--bg-2); border: 1px solid var(--line); padding: 6px 12px; }
-.rec-row { display: flex; align-items: center; gap: 12px; padding: 9px 0; border-bottom: 1px solid var(--line); }
-.rec-row:last-child { border: 0; }
-.rec-row .meta { flex: 1; min-width: 0; }
-.rec-row b { display: block; font-size: 14px; }
-.rec-row small { color: var(--muted); font-size: 12px; }
-.rec-row .amt { font-family: var(--display); font-weight: 600; font-size: 13.5px; }
-.due-chip { font-size: 10.5px; font-weight: 800; padding: 2px 7px; border-radius: 6px; background: color-mix(in srgb, var(--amber) 18%, transparent); color: color-mix(in srgb, var(--amber) 75%, var(--text)); margin-left: 6px; }
-
-/* investments visual */
-.inv { display: grid; grid-template-columns: 1.1fr 1fr; gap: 16px; align-items: stretch; }
-.inv-chart { border-radius: 18px; background: var(--bg-2); border: 1px solid var(--line); padding: 16px; display: grid; gap: 4px; align-content: start; }
-.inv-chart small { color: var(--muted); font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
-.inv-chart strong { font-family: var(--display); font-size: 26px; font-weight: 600; letter-spacing: -.03em; }
-.inv-chart .gain { color: var(--income); font-weight: 800; font-size: 13px; }
-.inv-chart svg { width: 100%; height: 110px; margin-top: 8px; overflow: visible; }
-.inv-line { fill: none; stroke: var(--lime); stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset 2s var(--ease); }
-.inv-area { fill: url(#invGrad); opacity: 0; transition: opacity 1.2s .8s var(--ease); }
-.in .inv-line { stroke-dashoffset: 0; }
-.in .inv-area { opacity: 1; }
-.holdings { display: grid; gap: 8px; }
-.hold { display: flex; align-items: center; gap: 12px; padding: 10px 12px; border-radius: 16px; background: var(--bg-2); border: 1px solid var(--line); }
-.hold .meta { flex: 1; min-width: 0; }
-.hold b { display: block; font-size: 13.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.hold small { color: var(--muted); font-size: 11.5px; }
-.hold .amt { text-align: right; font-family: var(--display); font-weight: 600; font-size: 13px; }
-.hold .amt small { display: block; font-family: var(--body); font-weight: 700; color: var(--income); }
-.src { display: inline-block; font-size: 9.5px; font-weight: 800; letter-spacing: .06em; padding: 2px 6px; border-radius: 5px; margin-left: 5px; vertical-align: 1px; }
-.src-nav { background: color-mix(in srgb, var(--lime) 16%, transparent); color: var(--lime-text); }
-.src-live { background: color-mix(in srgb, var(--blue) 18%, transparent); color: color-mix(in srgb, var(--blue) 75%, var(--text)); }
-.src-man { background: var(--surface-2); color: var(--muted); }
-
 /* lending visual */
 .lend { display: grid; gap: 10px; }
 .lend-card { display: flex; align-items: center; gap: 12px; border-radius: 18px; background: var(--bg-2); border: 1px solid var(--line); padding: 14px; }
@@ -784,7 +751,6 @@ p { margin: 0; }
   .bento { grid-template-columns: 1fr; }
   .feat.wide-md { grid-column: span 1; }
   .feat { padding: 22px; min-height: 0; }
-  .inv { grid-template-columns: 1fr; }
   .donut-wrap { grid-template-columns: 1fr; justify-items: center; }
   .donut-wrap svg { max-width: 190px; }
   .cat-list { width: 100%; }
